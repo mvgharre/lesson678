@@ -1,6 +1,7 @@
 package com.example.hariprasad.assignment6;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -31,6 +32,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         FrameLayout GameLayout = new FrameLayout(this);
         LinearLayout buttonlayout = new LinearLayout(this);
 
+        gameView = new GameView(this);
+
         // buttonlayout.addView(flowerButton);
         //    buttonlayout.addView(image);
         // buttonlayout.setBackgroundResource(R.drawable.background);
@@ -43,6 +46,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onPause() {
         super.onPause();
+
+        SharedPreferences prefs = getSharedPreferences("GopherPokeData", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+
+        String tempscore=Integer.toString( gameView.getScore() );
+        editor.putString("GopherPokeScore", tempscore);
+
+        editor.commit();
+
+        super.onPause();
+
         gameView.killThread();
     }
 
@@ -56,5 +71,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
 
 
+    }
+
+    @Override
+    protected void onResume()
+    {
+        SharedPreferences prefs = getSharedPreferences("GopherPokeData",MODE_PRIVATE);
+        String retrievedHighScore = prefs.getString("GopherPokeScore", "1");
+
+        gameView.setScore( Integer.valueOf(retrievedHighScore) );
+
+        super.onResume();
     }
 }

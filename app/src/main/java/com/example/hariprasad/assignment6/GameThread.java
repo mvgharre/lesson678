@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 /**
- * Created by 984707 on 12/3/2015.
+ * Created by 984652 on 12/3/2015.
  */
 public class GameThread extends Thread
 {

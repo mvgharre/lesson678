@@ -37,10 +37,22 @@ public class GameView extends SurfaceView {
     int max = 300;
     int min1 = 100;
     int max2 = 500;
-    int startTime = 10000;
+    int startTime = 20000;
     int intervalTime = 1000;
     CountDownTimer maintimer;
 
+    public int getScore()
+    {
+        return score;
+    }
+
+    public void setScore(int scoreIn)
+    {
+        score = scoreIn;
+    }
+
+   public  void  GameView ()
+    {}
 
     public GameView(final Context context) {
         super(context);
