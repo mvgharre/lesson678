@@ -25,6 +25,7 @@ import java.util.Random;
  */
 public class GameView extends SurfaceView {
     SurfaceHolder holder;
+
     Bitmap mainCat;
     private int score = 0;
     private long timer = 0;
@@ -67,6 +68,8 @@ public class GameView extends SurfaceView {
                 scorePaint.setColor(Color.BLACK);
                 scorePaint.setTextSize(50.0f);
                 makeThread();
+                gthread.setRunning(true);
+                gthread.start();
 
                 maintimer = new CountDownTimer(startTime, intervalTime) {
                     @Override
@@ -118,6 +121,8 @@ public class GameView extends SurfaceView {
 
         });
     }
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -181,6 +186,21 @@ public class GameView extends SurfaceView {
             }
         }
         return false;
+    }
+
+
+
+    protected void onResume()
+    {
+        makeThread();
+
+    }
+
+
+    protected void onPause()
+    {
+        killThread();
+
     }
 
 
